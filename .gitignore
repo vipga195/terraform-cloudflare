@@ -1,0 +1,11 @@
+# Terraform local state & cash
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Variable values containing secrets
+*.tfvars
+.env
+tfplan
+imports.tf
