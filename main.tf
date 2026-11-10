@@ -41,3 +41,37 @@ resource "cloudflare_dns_record" "tunnel" {
   proxied = true
   ttl     = 1
 }
+
+# Dedicated tunnel whose connector runs on the AWS host, so origin traffic stays on localhost
+resource "cloudflare_zero_trust_tunnel_cloudflared" "aws" {
+  account_id = var.account_id
+  name       = "cocahome-aws"
+  config_src = "cloudflare"
+}
+
+resource "cloudflare_zero_trust_tunnel_cloudflared_config" "aws" {
+  account_id = var.account_id
+  tunnel_id  = cloudflare_zero_trust_tunnel_cloudflared.aws.id
+
+  config = {
+    ingress = [
+      { hostname = "app.${local.domain}", service = "http://localhost:80" },
+      { service = "http_status:404" },
+    ]
+  }
+}
+
+resource "cloudflare_dns_record" "app" {
+  zone_id = var.zone_id
+  name    = "app.${local.domain}"
+  type    = "CNAME"
+  content = "${cloudflare_zero_trust_tunnel_cloudflared.aws.id}.cfargotunnel.com"
+  proxied = true
+  ttl     = 1
+}
+
+resource "cloudflare_zone_setting" "always_use_https" {
+  zone_id    = var.zone_id
+  setting_id = "always_use_https"
+  value      = "on"
+}
