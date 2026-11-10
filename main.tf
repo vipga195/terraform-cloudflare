@@ -7,6 +7,7 @@ locals {
     { subdomain = "portfolio", service = "http://host.docker.internal:1995" },
     { subdomain = "deploy", service = "http://deploy-hook:9000" },
     { subdomain = "webdav", service = "http://host.docker.internal:8000" },
+    { subdomain = "app", service = "http://3.26.219.247" },
   ]
 }
 
@@ -42,14 +43,14 @@ resource "cloudflare_dns_record" "tunnel" {
   ttl     = 1
 }
 
-resource "cloudflare_dns_record" "app" {
-  zone_id = var.zone_id
-  name    = "app.${local.domain}"
-  type    = "A"
-  content = "3.26.219.247"
-  proxied = true
-  ttl     = 1
-}
+#resource "cloudflare_dns_record" "app" {
+#  zone_id = var.zone_id
+#  name    = "app.${local.domain}"
+#  type    = "A"
+#  content = "3.26.219.247"
+#  proxied = true
+#  ttl     = 1
+#}
 
 resource "cloudflare_zone_setting" "always_use_https" {
   zone_id    = var.zone_id
