@@ -55,7 +55,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "aws" {
 
   config = {
     ingress = [
-      { hostname = "app.${local.domain}", service = "http://localhost:80" },
+      { hostname = "app.${local.domain}", service = "http://3.26.219.247:80" },
       { service = "http_status:404" },
     ]
   }
