@@ -8,6 +8,7 @@ locals {
     { subdomain = "deploy", service = "http://deploy-hook:9000" },
     { subdomain = "webdav", service = "http://host.docker.internal:8000" },
     { subdomain = "app", service = "http://3.26.219.247" },
+    { subdomain = "connect", service = "http://host.docker.internal:8088" },
   ]
 }
 
