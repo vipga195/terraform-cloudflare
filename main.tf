@@ -37,6 +37,9 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "home" {
 resource "cloudflare_dns_record" "tunnel" {
   for_each = { for s in local.services : s.subdomain => s }
 
+  # Never publish eve before its Access app exists (EVE has default admin credentials)
+  depends_on = [cloudflare_zero_trust_access_application.eve]
+
   zone_id = var.zone_id
   name    = "${each.key}.${local.domain}"
   type    = "CNAME"
