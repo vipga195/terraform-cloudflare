@@ -3,12 +3,12 @@ locals {
 
   # Order matters: cloudflared matches ingress rules top to bottom
   services = [
-    { subdomain = "media", service = "http://host.docker.internal:8080" },
-    { subdomain = "portfolio", service = "http://host.docker.internal:1995" },
-    { subdomain = "deploy", service = "http://deploy-hook:9000" },
-    { subdomain = "webdav", service = "http://host.docker.internal:8000" },
+    { subdomain = "media", service = "http://192.168.29.195:8080" },
+    { subdomain = "portfolio", service = "http://192.168.29.195:1995" },
+    { subdomain = "deploy", service = "http://192.168.29.195:9000" },
+    { subdomain = "webdav", service = "http://192.168.29.195:8000" },
     { subdomain = "app", service = "http://3.26.219.247" },
-    { subdomain = "connect", service = "http://host.docker.internal:8088" },
+    { subdomain = "connect", service = "http://192.168.29.195:8088" },
     { subdomain = "eve", service = "http://192.168.29.173:80" },
   ]
 }
