@@ -8,7 +8,7 @@ locals {
     { subdomain = "deploy", service = "http://192.168.29.195:9000" },
     { subdomain = "webdav", service = "http://192.168.29.195:8000" },
     { subdomain = "app", service = "http://3.26.219.247" },
-    { subdomain = "connect", service = "http://192.168.29.195:8088" },
+    { subdomain = "connect", service = "http://127.0.0.1:8088" },
     { subdomain = "eve", service = "http://192.168.29.173:80" },
     { subdomain = "cdn", service = "http://127.0.0.1:8090" },
     { subdomain = "cms", service = "http://127.0.0.1:8090" },
