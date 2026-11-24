@@ -8,8 +8,8 @@ variable "account_id" {
   description = "Cloudflare account ID"
 }
 
-variable "access_email" {
-  type        = string
-  description = "Email allowed through Cloudflare Access (set via TF_VAR_access_email)"
+variable "access_emails" {
+  type        = list(string)
+  description = "Emails allowed through Cloudflare Access (set via TF_VAR_access_emails, e.g. [\"a@x.com\"])"
   sensitive   = true
 }
