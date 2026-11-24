@@ -64,12 +64,12 @@ resource "cloudflare_zone_setting" "always_use_https" {
   value      = "on"
 }
 
-# EVE-NG web UI: only the owner's email may pass Cloudflare Access (repo variable ACCESS_EMAIL)
+# EVE-NG web UI: only listed emails may pass Cloudflare Access (repo variable ACCESS_EMAILS, JSON list)
 resource "cloudflare_zero_trust_access_policy" "eve_owner" {
   account_id = var.account_id
   name       = "eve-owner-only"
   decision   = "allow"
-  include    = [{ email = { email = var.access_email } }]
+  include    = [for e in var.access_emails : { email = { email = e } }]
 }
 
 resource "cloudflare_zero_trust_access_application" "eve" {
